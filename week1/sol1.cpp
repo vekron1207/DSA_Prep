@@ -6,7 +6,7 @@ int main()
     int num[5];
     cout << "Enter 5 numbers: " << endl;
 
-    for (int i = 0; i < 5 : i++)
+    for (int i = 0; i < 5; i++)
     {
         cin >> num[i];
     }
