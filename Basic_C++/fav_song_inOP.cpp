@@ -5,47 +5,49 @@ using namespace std;
 
 int main()
 {
+    // We're asking the user how many songs they have in their playlist
     int n;
     cout << "Enter the number of songs in the playlist: ";
     cin >> n;
 
-    // Initialize a vector to count the occurrences of each singer ID
-    vector<int> singerCount(n, 0);
-    int maxSongs = 0;   // Maximum number of songs by a single singer
-    int maxSingers = 0; // Number of singers with the maximum number of songs
+    // We're setting up some containers to keep track of singers and their songs
+    int maxSongs = 0;   // This will store the maximum number of songs by any one singer
+    int maxSingers = 0; // This will store the number of singers with the most songs
 
-    // Read the singer IDs and count their occurrences
+    // This is like having labeled jars to put things in; we'll use it to count how many songs each singer has
+    vector<int> singerCount;
+
+    // Now we're going through each song to find out who sings it
     for (int i = 0; i < n; ++i)
     {
+        // We're asking the user who sings the current song
         int singerID;
         cout << "Enter singer ID for song " << i + 1 << ": ";
         cin >> singerID;
 
-        // Check if the input singer ID is within the expected range
-        if (singerID < 0 || singerID >= n)
-        {
-            cout << "Singer ID out of range. Please enter a value between 0 and " << n - 1 << endl;
-            --i;      // Decrement i to repeat the input for this song
-            continue; // Skip the rest of this iteration
-        }
+        // We're making sure we have enough jars for all our singers
+        singerCount.resize(max(singerCount.size(), static_cast<size_t>(singerID) + 1), 0);
 
-        // Increment the count for this singer ID
+        // We're putting a song in the jar labeled with the singer's ID
         singerCount[singerID]++;
 
-        // Check if we have a new maximum
+        // Now we're checking if this singer has more songs than anyone else
         if (singerCount[singerID] > maxSongs)
         {
+            // If they do, we update our record of the most songs and reset the count of singers with that many songs
             maxSongs = singerCount[singerID];
-            maxSingers = 1; // Reset the number of max singers since we have a new max
+            maxSingers = 1;
         }
+        // If this singer has the same number of songs as our current maximum, we add them to the count of top singers
         else if (singerCount[singerID] == maxSongs)
         {
-            maxSingers++; // Increment the number of max singers
+            maxSingers++;
         }
     }
 
-    // Output the number of singers who have the most songs in the playlist
+    // Finally, we're telling the user how many singers have the most songs
     cout << "Number of singers with the most songs in the playlist: " << maxSingers << endl;
 
+    // We're letting the computer know everything went well and we're finished
     return 0;
 }
