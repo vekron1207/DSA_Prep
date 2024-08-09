@@ -8,9 +8,9 @@ public class PerfectSquareChecker {
 
         for (int num : numbers) {
             if (num >= 0) {
-                int squrt = (int) Math.sqrt(num);
+                int squrt = (int) Math.sqrt(num); // 121: 11 // 122 = 11.~
                 if (squrt * squrt == num) {
-                    perfectSqr++;
+                    perfectSqr++; // +1
                 }
             }
         }
